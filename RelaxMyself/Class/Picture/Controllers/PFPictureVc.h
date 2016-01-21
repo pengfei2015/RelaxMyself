@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  PFPictureVc.h
 //  RelaxMyself
 //
 //  Created by 温鹏飞 on 16/1/21.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
+@interface PFPictureVc : UIViewController
 
 @end
-
