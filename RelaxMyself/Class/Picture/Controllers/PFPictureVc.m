@@ -16,6 +16,12 @@
 #import "PFWaterFlowLayout.h"
 #import "PFPictureCell.h"
 
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
+
+#import "PFPictureShowVc.h"
+
+#import "PFPictureDataCache.h"
 
 typedef NS_ENUM(NSUInteger,PFRequestType) {
     PFRequestNew,
@@ -24,19 +30,23 @@ typedef NS_ENUM(NSUInteger,PFRequestType) {
 #define PFNUMBER_PERROW 4
 @interface PFPictureVc ()<DOPNavbarMenuDelegate,PFWaterFlowLayoutDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
+{
+    NSUInteger _selectItemIndex;
+}
 // 导航栏菜单按钮
-@property (nonatomic, assign) BOOL menuIsOPen;
 @property (nonatomic, strong) DOPNavbarMenu *menu;
 @property (nonatomic, strong) NSArray *itemTitles;
 @property (nonatomic, strong) NSArray *itemImages;
 @property (nonatomic, strong) NSMutableArray *images;
 // 瀑布流界面
 @property (nonatomic, weak) UICollectionView *collectionView;
-
+@property (nonatomic, strong) PFWaterFlowLayout *layout;
 // 网络请求参数
 @property (nonatomic, copy) NSString *tag1;
-@property (nonatomic, copy) NSString *tag2;
 @property (nonatomic, assign) NSUInteger pn;
+
+@property (nonatomic, assign) NSUInteger displayingIndex;
+
 
 @end
 
@@ -87,24 +97,50 @@ typedef NS_ENUM(NSUInteger,PFRequestType) {
     return _menu;
 }
 
-
 static NSString *const ID = @"PFPictureCell";
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImageName:@"categories" target:self action:@selector(openMenu:)];
     
-    self.tag1 = @"美女";
-    self.tag2 = @"小清新";
-    self.pn = 0;
+    self.displayingIndex = 100;
     
+    [self setupCollectionView];
     
+    [self didSelectedMenu:self.menu atIndex:0];
+    
+    [self didRotateFromInterfaceOrientation:self.interfaceOrientation];
+    
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+        self.layout.columsCount = 2;
+    }else{
+        self.layout.columsCount = 5;
+    }
+    [self.collectionView reloadData];
+    [self.menu setNeedsLayout];
+    [self.menu layoutIfNeeded];
+}
+
+- (void)setupCollectionView
+{
     PFWaterFlowLayout *layout = [[PFWaterFlowLayout alloc] init];
     layout.columsCount = 2;
     layout.delegate = self;
-    
+    self.layout = layout;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    collectionView.backgroundColor = [UIColor whiteColor];
     collectionView.delegate = self;
     collectionView.dataSource = self;
     [collectionView registerNib:[UINib nibWithNibName:@"PFPictureCell" bundle:nil] forCellWithReuseIdentifier:ID];
@@ -132,6 +168,26 @@ static NSString *const ID = @"PFPictureCell";
 
 - (void)loadDataForType:(PFRequestType)type
 {
+    // 根据item头像的地址确定唯一标识  用来存储数据和取数据
+    NSString *idstr = self.itemImages[self.menu.selectItemsIndex];
+    // 取出的数据
+    NSArray *arr = [PFPictureDataCache dataWithIdstr:idstr];
+    PFLog(@"%@  %lu",idstr,arr.count);
+
+    PFLog(@"%lu ,  %lu",self.displayingIndex, self.menu.selectItemsIndex);
+    // 如果当前显示的页面和点击的页面不是同一页面 并且有缓存数据的时候 从缓存中取出数据
+    if (self.displayingIndex != self.menu.selectItemsIndex && arr.count > 0) {
+        // 清空上一页面的数据
+        [self.images removeAllObjects];
+        
+        [self.images addObjectsFromArray:arr];
+        [self.collectionView headerEndRefreshing];
+        [self.collectionView reloadData];
+        // 赋值
+        self.displayingIndex = self.menu.selectItemsIndex;
+        return;
+    }
+
     NSMutableDictionary *request = [NSMutableDictionary dictionary];
     request[@"rn"] = @30;
     if (PFRequestNew == type) {
@@ -141,7 +197,7 @@ static NSString *const ID = @"PFPictureCell";
     }
     request[@"pn"] = PFFORMAT(@"%lu",self.pn);
     
-    NSString *url = PFFORMAT(@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",self.tag1,self.tag2);
+    NSString *url = PFFORMAT(@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=全部",self.tag1);
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [PFHttpTool GET:url parameters:request progress:nil success:^(id response) {
         //[MBProgressHUD hideHUD];
@@ -159,12 +215,19 @@ static NSString *const ID = @"PFPictureCell";
         
         [self.images addObjectsFromArray:picturs];
         [self.collectionView reloadData];
+        
+        [PFPictureDataCache saveDataWithArr:self.images idstr:idstr];
+        self.displayingIndex = self.menu.selectItemsIndex;
+
     } failure:^(NSError *error) {
         PFLog(@"PFPictureVc");
+        [self.collectionView headerEndRefreshing];
+        [self.collectionView footerEndRefreshing];
         [MBProgressHUD showError:@"加载失败，请检查网络设置"];
     }];
     
 }
+
 - (void)openMenu:(UIButton *)button
 {
     if (self.menu.isOpen) {
@@ -195,5 +258,25 @@ static NSString *const ID = @"PFPictureCell";
     return cell;
 }
 
-#pragma mark --
+#pragma mark -- UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PFPictureShowVc *browser = [[PFPictureShowVc alloc] init];
+    browser.pictures = self.images;
+    browser.currentPhotoIndex = indexPath.item;
+    
+    [browser show];
+}
+
+#pragma mark -- DOPNavbarMenuDelegate
+- (void)didSelectedMenu:(DOPNavbarMenu *)menu atIndex:(NSInteger)index
+{
+    //[self.collectionView setContentOffset:CGPointMake(0, -64) animated:NO];
+    self.tag1 = self.itemTitles[index];
+    self.pn = 0;
+    self.title = self.itemTitles[index];
+    [self.collectionView headerBeginRefreshing];
+}
+
 @end

@@ -58,7 +58,6 @@
     [super prepareLayout];
     
     for (int i = 0; i < self.columsCount; ++i) {
-        
         NSString *colum = [NSString stringWithFormat:@"%d",i];
         self.maxYDict[colum] = @(self.sectionInset.top);
     }

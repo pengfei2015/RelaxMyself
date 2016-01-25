@@ -36,9 +36,9 @@
 //iOS7+
 @interface DOPNavbarMenu : UIView
 
-//@property (nonatomic, assign) BOOL isShow;
 @property (copy, nonatomic, readonly) NSArray *items;
 @property (assign, nonatomic, readonly) NSInteger maximumNumberInRow;
+@property (nonatomic, assign) NSUInteger selectItemsIndex;
 @property (assign, nonatomic, getter=isOpen) BOOL open;
 @property (weak, nonatomic) id <DOPNavbarMenuDelegate> delegate;
 

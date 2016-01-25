@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PFPictureModel : NSObject
+@interface PFPictureModel : NSObject<NSCoding>
 
 @property (nonatomic, assign) CGFloat small_width;
 @property (nonatomic, assign) CGFloat small_height;

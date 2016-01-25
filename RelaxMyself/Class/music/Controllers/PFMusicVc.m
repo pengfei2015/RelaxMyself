@@ -7,6 +7,7 @@
 //
 
 #import "PFMusicVc.h"
+#import "DOUAudioStreamer.h"
 
 @interface PFMusicVc ()
 

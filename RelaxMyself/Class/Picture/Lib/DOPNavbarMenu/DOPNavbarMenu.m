@@ -157,6 +157,7 @@ static CGFloat titleFontSize = 15.0;
 
 - (void)buttonTapped:(UIButton *)button {
     if ([self.delegate respondsToSelector:@selector(didSelectedMenu:atIndex:)]) {
+        _selectItemsIndex = button.tag;
         [self.delegate didSelectedMenu:self atIndex:button.tag];
     }
     [self dismissMenu];
