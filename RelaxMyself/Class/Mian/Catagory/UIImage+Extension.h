@@ -13,4 +13,8 @@
 + (UIImage *)imageWithColor:(UIColor *)color;
 
 + (UIImage *)resizedImage:(NSString *)name;
+
++ (instancetype)circleImageWithName:(NSString *)name borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor;
+
++ (instancetype)circleImageWithImage:(UIImage *)image borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor;
 @end

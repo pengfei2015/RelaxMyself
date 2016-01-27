@@ -27,7 +27,7 @@
 - (NSArray *)controllerNames
 {
     if (!_controllerNames) {
-        _controllerNames = @[@"PFPictureVc",@"PFReadingVc",@"PFMusicVc"];
+        _controllerNames = @[@"PFPictureVc",@"PFMusicVc",@"PFReadingVc"];
     }
     return _controllerNames;
 }
