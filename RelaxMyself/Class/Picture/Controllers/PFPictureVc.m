@@ -21,7 +21,7 @@
 
 #import "PFPictureShowVc.h"
 
-#import "PFPictureDataCache.h"
+#import "PFPictureDataCacheTool.h"
 
 typedef NS_ENUM(NSUInteger,PFRequestType) {
     PFRequestNew,
@@ -127,8 +127,7 @@ static NSString *const ID = @"PFPictureCell";
         self.layout.columsCount = 5;
     }
     [self.collectionView reloadData];
-    [self.menu setNeedsLayout];
-    [self.menu layoutIfNeeded];
+
 }
 
 - (void)setupCollectionView
@@ -171,7 +170,7 @@ static NSString *const ID = @"PFPictureCell";
     // 根据item头像的地址确定唯一标识  用来存储数据和取数据
     NSString *idstr = self.itemImages[self.menu.selectItemsIndex];
     // 取出的数据
-    NSArray *arr = [PFPictureDataCache dataWithIdstr:idstr];
+    NSArray *arr = [PFPictureDataCacheTool dataWithIdstr:idstr];
     PFLog(@"%@  %lu",idstr,arr.count);
 
     PFLog(@"%lu ,  %lu",self.displayingIndex, self.menu.selectItemsIndex);
@@ -216,7 +215,7 @@ static NSString *const ID = @"PFPictureCell";
         [self.images addObjectsFromArray:picturs];
         [self.collectionView reloadData];
         
-        [PFPictureDataCache saveDataWithArr:self.images idstr:idstr];
+        [PFPictureDataCacheTool saveDataWithArr:self.images idstr:idstr];
         self.displayingIndex = self.menu.selectItemsIndex;
 
     } failure:^(NSError *error) {

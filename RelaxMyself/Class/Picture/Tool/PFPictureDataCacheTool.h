@@ -11,7 +11,7 @@
 
 @class PFPictureModel;
 
-@interface PFPictureDataCache : NSObject
+@interface PFPictureDataCacheTool : NSObject
 
 + (void)saveDataWithArr:(NSArray *)arr idstr:(NSString *)idstr;
 

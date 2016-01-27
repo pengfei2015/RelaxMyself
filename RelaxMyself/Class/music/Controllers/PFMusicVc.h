@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PFMusicVc : UIViewController
+
+
+@interface PFMusicVc : UITableViewController
+
 
 @end

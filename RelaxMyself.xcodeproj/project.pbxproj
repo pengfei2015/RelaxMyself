@@ -31,6 +31,11 @@
 		D3010BF31C55BF4A00FA4888 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D3010BEC1C55BF4A00FA4888 /* FMDatabaseQueue.m */; };
 		D3010BF41C55BF4A00FA4888 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D3010BEF1C55BF4A00FA4888 /* FMResultSet.m */; };
 		D3010BF91C55C61B00FA4888 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3010BF81C55C61B00FA4888 /* libsqlite3.0.tbd */; };
+		D33BB5DB1C570562004B1FA2 /* PFMusicDataCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D33BB5DA1C570562004B1FA2 /* PFMusicDataCacheTool.m */; };
+		D33BB5DE1C570A5A004B1FA2 /* PFMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D33BB5DD1C570A5A004B1FA2 /* PFMusicCell.m */; };
+		D33BB5E11C57175D004B1FA2 /* PFMusicPlayingVc.m in Sources */ = {isa = PBXBuildFile; fileRef = D33BB5E01C57175D004B1FA2 /* PFMusicPlayingVc.m */; };
+		D36C7D641C573DEE003F51AD /* PFMusicPlayingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C7D631C573DEE003F51AD /* PFMusicPlayingFooterView.m */; };
+		D380970C1C5907D000EA0AA3 /* PFAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = D380970B1C5907D000EA0AA3 /* PFAudioFile.m */; };
 		D391801B1C50788000D824E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D391801A1C50788000D824E3 /* ViewController.m */; };
 		D391801E1C50788000D824E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D391801C1C50788000D824E3 /* Main.storyboard */; };
 		D39180201C50788000D824E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D391801F1C50788000D824E3 /* Assets.xcassets */; };
@@ -103,7 +108,8 @@
 		D3CB6D801C527A590072984D /* PFWaterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CB6D7F1C527A590072984D /* PFWaterFlowLayout.m */; };
 		D3CB6D841C5286ED0072984D /* PFPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CB6D821C5286ED0072984D /* PFPictureCell.m */; };
 		D3CB6D851C5286ED0072984D /* PFPictureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3CB6D831C5286ED0072984D /* PFPictureCell.xib */; };
-		D3D26D731C55F9B10004A659 /* PFPictureDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D26D721C55F9B10004A659 /* PFPictureDataCache.m */; };
+		D3D26D731C55F9B10004A659 /* PFPictureDataCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D26D721C55F9B10004A659 /* PFPictureDataCacheTool.m */; };
+		D3D26D761C5625970004A659 /* PFMusicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D26D751C5625970004A659 /* PFMusicModel.m */; };
 		D3F566F71C54F28100E2446A /* MJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F566E91C54F28100E2446A /* MJPhoto.m */; };
 		D3F566F81C54F28100E2446A /* MJPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3F566EA1C54F28100E2446A /* MJPhotoBrowser.bundle */; };
 		D3F566F91C54F28100E2446A /* MJPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F566EC1C54F28100E2446A /* MJPhotoBrowser.m */; };
@@ -184,6 +190,16 @@
 		D3010BEE1C55BF4A00FA4888 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		D3010BEF1C55BF4A00FA4888 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		D3010BF81C55C61B00FA4888 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		D33BB5D91C570562004B1FA2 /* PFMusicDataCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicDataCacheTool.h; sourceTree = "<group>"; };
+		D33BB5DA1C570562004B1FA2 /* PFMusicDataCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicDataCacheTool.m; sourceTree = "<group>"; };
+		D33BB5DC1C570A5A004B1FA2 /* PFMusicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicCell.h; sourceTree = "<group>"; };
+		D33BB5DD1C570A5A004B1FA2 /* PFMusicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicCell.m; sourceTree = "<group>"; };
+		D33BB5DF1C57175D004B1FA2 /* PFMusicPlayingVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicPlayingVc.h; sourceTree = "<group>"; };
+		D33BB5E01C57175D004B1FA2 /* PFMusicPlayingVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicPlayingVc.m; sourceTree = "<group>"; };
+		D36C7D621C573DEE003F51AD /* PFMusicPlayingFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicPlayingFooterView.h; sourceTree = "<group>"; };
+		D36C7D631C573DEE003F51AD /* PFMusicPlayingFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicPlayingFooterView.m; sourceTree = "<group>"; };
+		D380970A1C5907D000EA0AA3 /* PFAudioFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFAudioFile.h; sourceTree = "<group>"; };
+		D380970B1C5907D000EA0AA3 /* PFAudioFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFAudioFile.m; sourceTree = "<group>"; };
 		D39180101C50788000D824E3 /* RelaxMyself.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RelaxMyself.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39180191C50788000D824E3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D391801A1C50788000D824E3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -332,8 +348,10 @@
 		D3CB6D811C5286ED0072984D /* PFPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFPictureCell.h; sourceTree = "<group>"; };
 		D3CB6D821C5286ED0072984D /* PFPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFPictureCell.m; sourceTree = "<group>"; };
 		D3CB6D831C5286ED0072984D /* PFPictureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFPictureCell.xib; sourceTree = "<group>"; };
-		D3D26D711C55F9B10004A659 /* PFPictureDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFPictureDataCache.h; sourceTree = "<group>"; };
-		D3D26D721C55F9B10004A659 /* PFPictureDataCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFPictureDataCache.m; sourceTree = "<group>"; };
+		D3D26D711C55F9B10004A659 /* PFPictureDataCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFPictureDataCacheTool.h; sourceTree = "<group>"; };
+		D3D26D721C55F9B10004A659 /* PFPictureDataCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFPictureDataCacheTool.m; sourceTree = "<group>"; };
+		D3D26D741C5625970004A659 /* PFMusicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicModel.h; sourceTree = "<group>"; };
+		D3D26D751C5625970004A659 /* PFMusicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicModel.m; sourceTree = "<group>"; };
 		D3F566E81C54F28100E2446A /* MJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhoto.h; sourceTree = "<group>"; };
 		D3F566E91C54F28100E2446A /* MJPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhoto.m; sourceTree = "<group>"; };
 		D3F566EA1C54F28100E2446A /* MJPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJPhotoBrowser.bundle; sourceTree = "<group>"; };
@@ -802,6 +820,8 @@
 			children = (
 				D39180FB1C51049400D824E3 /* PFMusicVc.h */,
 				D39180FC1C51049400D824E3 /* PFMusicVc.m */,
+				D33BB5DF1C57175D004B1FA2 /* PFMusicPlayingVc.h */,
+				D33BB5E01C57175D004B1FA2 /* PFMusicPlayingVc.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -809,6 +829,10 @@
 		D39180F91C51044000D824E3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D3D26D741C5625970004A659 /* PFMusicModel.h */,
+				D3D26D751C5625970004A659 /* PFMusicModel.m */,
+				D380970A1C5907D000EA0AA3 /* PFAudioFile.h */,
+				D380970B1C5907D000EA0AA3 /* PFAudioFile.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -816,6 +840,10 @@
 		D39180FA1C51044000D824E3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D33BB5DC1C570A5A004B1FA2 /* PFMusicCell.h */,
+				D33BB5DD1C570A5A004B1FA2 /* PFMusicCell.m */,
+				D36C7D621C573DEE003F51AD /* PFMusicPlayingFooterView.h */,
+				D36C7D631C573DEE003F51AD /* PFMusicPlayingFooterView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -869,6 +897,8 @@
 			children = (
 				D3CB6D621C522C9F0072984D /* PFHttpTool.h */,
 				D3CB6D631C522C9F0072984D /* PFHttpTool.m */,
+				D33BB5D91C570562004B1FA2 /* PFMusicDataCacheTool.h */,
+				D33BB5DA1C570562004B1FA2 /* PFMusicDataCacheTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -876,8 +906,8 @@
 		D3D26D701C55F95D0004A659 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				D3D26D711C55F9B10004A659 /* PFPictureDataCache.h */,
-				D3D26D721C55F9B10004A659 /* PFPictureDataCache.m */,
+				D3D26D711C55F9B10004A659 /* PFPictureDataCacheTool.h */,
+				D3D26D721C55F9B10004A659 /* PFPictureDataCacheTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1054,8 +1084,9 @@
 				D39180F61C5103F300D824E3 /* PFReadingVc.m in Sources */,
 				D3CB6D5A1C522A240072984D /* MJRefreshHeaderView.m in Sources */,
 				D39180C41C50792800D824E3 /* MJArgument.m in Sources */,
-				D3D26D731C55F9B10004A659 /* PFPictureDataCache.m in Sources */,
+				D3D26D731C55F9B10004A659 /* PFPictureDataCacheTool.m in Sources */,
 				D39180CE1C50792800D824E3 /* NSData+ImageContentType.m in Sources */,
+				D3D26D761C5625970004A659 /* PFMusicModel.m in Sources */,
 				D39180C81C50792800D824E3 /* MJType.m in Sources */,
 				D39180F31C5101DD00D824E3 /* PFControllerModel.m in Sources */,
 				D39180B71C50792800D824E3 /* UIImage+Extension.m in Sources */,
@@ -1066,6 +1097,7 @@
 				D39180D61C50792800D824E3 /* UIButton+WebCache.m in Sources */,
 				D3CB6D571C522A240072984D /* MJRefreshBaseView.m in Sources */,
 				D39180F01C50FB6000D824E3 /* PFLeftCell.m in Sources */,
+				D33BB5DB1C570562004B1FA2 /* PFMusicDataCacheTool.m in Sources */,
 				D3010BDE1C55BEF700FA4888 /* DOUAudioStreamer.m in Sources */,
 				D39180D51C50792800D824E3 /* SDWebImagePrefetcher.m in Sources */,
 				D3CB6D5D1C522A240072984D /* UIView+Extension.m in Sources */,
@@ -1085,11 +1117,14 @@
 				D3010BD51C55BEF700FA4888 /* DOUAudioEventLoop.m in Sources */,
 				D39180C91C50792800D824E3 /* MJTypeEncoding.m in Sources */,
 				D39180B81C50792800D824E3 /* UIView+PFExension.m in Sources */,
+				D380970C1C5907D000EA0AA3 /* PFAudioFile.m in Sources */,
 				D39180D41C50792800D824E3 /* SDWebImageManager.m in Sources */,
 				D39180C11C50792800D824E3 /* MBProgressHUD+MJ.m in Sources */,
 				D39180CC1C50792800D824E3 /* NSObject+MJMember.m in Sources */,
 				D3010BF11C55BF4A00FA4888 /* FMDatabaseAdditions.m in Sources */,
 				D3F566FB1C54F28100E2446A /* MJPhotoProgressView.m in Sources */,
+				D33BB5E11C57175D004B1FA2 /* PFMusicPlayingVc.m in Sources */,
+				D36C7D641C573DEE003F51AD /* PFMusicPlayingFooterView.m in Sources */,
 				D3010BF21C55BF4A00FA4888 /* FMDatabasePool.m in Sources */,
 				D39180DD1C50792800D824E3 /* AppDelegate.m in Sources */,
 				D3CB6D591C522A240072984D /* MJRefreshFooterView.m in Sources */,
@@ -1126,6 +1161,7 @@
 				D39180FD1C51049400D824E3 /* PFMusicVc.m in Sources */,
 				D39180D21C50792800D824E3 /* SDWebImageDownloader.m in Sources */,
 				D39180CD1C50792800D824E3 /* MKAnnotationView+WebCache.m in Sources */,
+				D33BB5DE1C570A5A004B1FA2 /* PFMusicCell.m in Sources */,
 				D3CB6D581C522A240072984D /* MJRefreshConst.m in Sources */,
 				D3F566FE1C54F28100E2446A /* SDWebImageManager+MJ.m in Sources */,
 				D3010BD41C55BEF700FA4888 /* DOUAudioDecoder.m in Sources */,
