@@ -14,6 +14,5 @@
 
 @property (nonatomic, strong) NSArray *musics;
 @property (nonatomic, assign) NSUInteger musicIndex;
-//@property (nonatomic, strong) PFMusicModel *music;
 
 @end

@@ -11,11 +11,13 @@
 #import "PFMainViewController.h"
 #import "AppDelegate.h"
 #import "PFMainNavViewController.h"
+#import "PFLeftBottomPlayView.h"
 
 @interface PFLeftMenuVc ()<UITableViewDelegate,UITableViewDataSource>
 
 {
     UITableView *_tableView;
+    PFLeftBottomPlayView *_bottomView;
 }
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSArray *imageNames;
@@ -64,9 +66,31 @@
     tableView.center = self.view.center;
     [self.view addSubview:tableView];
     _tableView = tableView;
+    
+    
+    PFLeftBottomPlayView *bottomView = [[PFLeftBottomPlayView alloc] init];
+    CGFloat bottomW = self.view.width;
+    CGFloat bottomH = 50;
+    CGFloat bottomX = 0;
+    CGFloat bottomY = self.view.height - bottomH - 20;
+    bottomView.backgroundColor = [UIColor redColor];
+    bottomView.frame = CGRectMake(bottomX, bottomY, bottomW, bottomH);
+    [self.view addSubview:bottomView];
+    _bottomView = bottomView;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingMusicChange:) name:PFMUSIC_PLAY_NOTIFICATION object:nil];
 }
 
+- (void)dealloc
+{
+    PFLog(@"NSNotificationCenter");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)playingMusicChange:(NSNotification *)notification
+{
+    _bottomView.music = notification.userInfo[PFMUSIC_PLAYING];
+}
 #pragma mark -- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

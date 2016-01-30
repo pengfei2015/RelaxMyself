@@ -13,6 +13,11 @@
 
 #import "PFHeader.h"
 
+#import "NSString+PF.h"
+
+#define PFMUSIC_PLAY_NOTIFICATION @"PFMusicPlayNotification"
+#define PFMUSIC_PLAYING @"PFMusicPlaying"
+
 #endif
 
 #endif /* PrefixHeader_pch */

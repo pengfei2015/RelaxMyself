@@ -44,8 +44,8 @@
 {
     // 1.开启上下文
     CGFloat imageW = image.size.width + 2 * borderWidth;
-    CGFloat imageH = image.size.height + 2 * borderWidth;
-    CGSize imageSize = CGSizeMake(imageW, imageH);
+    //CGFloat imageH = image.size.height + 2 * borderWidth;
+    CGSize imageSize = CGSizeMake(imageW, imageW);
     UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0.0);
     
     // 3.取得当前的上下文

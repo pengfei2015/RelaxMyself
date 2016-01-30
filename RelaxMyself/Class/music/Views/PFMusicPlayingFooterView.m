@@ -14,6 +14,8 @@
     UIButton *_playButton;
     UIButton *_nextButton;
     UIButton *_previousButon;
+    
+    BOOL _isPause;
 }
 
 @end
@@ -25,7 +27,7 @@
     if (self) {
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _playButton.tag = PFMusicPlayButtonTypePlay;
-        [_playButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+        [_playButton setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
         [_playButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_playButton];
         
@@ -70,6 +72,18 @@
 - (void)buttonClick:(UIButton *)button
 {
     if ([self.delegate respondsToSelector:@selector(musicPlayingFooterView:buttonTypeClick:)]) {
+        if (PFMusicPlayButtonTypeNext == button.tag || PFMusicPlayButtonTypePrevious == button.tag) {
+            [_playButton setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+            _isPause = YES;
+        }else{
+            if (_isPause) {
+                [_playButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+                _isPause = NO;
+            }else{
+                [_playButton setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+                _isPause = YES;
+            }
+        }
         [self.delegate musicPlayingFooterView:self buttonTypeClick:button.tag];
     }
 }

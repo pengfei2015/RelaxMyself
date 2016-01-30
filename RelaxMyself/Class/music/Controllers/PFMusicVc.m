@@ -91,7 +91,8 @@ static NSUInteger _page = 1;
     }else{
         ++_page;
     }
-    NSString *url = PFFORMAT(@"http://echosystem.kibey.com/channel/info?id=1&page=%lu",(unsigned long)_page);
+    //194
+    NSString *url = PFFORMAT(@"http://echosystem.kibey.com/channel/info?id=194&page=%lu",(unsigned long)_page);
     [PFHttpTool GET:url parameters:nil progress:nil success:^(id response) {
         NSDictionary *result = response[@"result"];
         NSDictionary *data = result[@"data"];
@@ -114,7 +115,7 @@ static NSUInteger _page = 1;
         _isFirst = 1;
         
     } failure:^(NSError *error) {
-        PFLog(@"");
+        PFLog(@"%@",error);
         [self.tableView headerEndRefreshing];
         [self.tableView footerEndRefreshing];
         [MBProgressHUD showError:@"加载失败，请检查网络设置"];
@@ -146,11 +147,9 @@ static NSUInteger _page = 1;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PFMusicPlayingVc *playingVc = [[PFMusicPlayingVc alloc] init];
-    //playingVc.music = self.musics[indexPath.row];
     playingVc.musics = self.musics;
     playingVc.musicIndex = indexPath.row;
     [self.navigationController pushViewController:playingVc animated:YES];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end

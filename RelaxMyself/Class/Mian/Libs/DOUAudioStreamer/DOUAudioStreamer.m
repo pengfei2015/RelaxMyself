@@ -56,7 +56,6 @@ NSString *const kDOUAudioStreamerErrorDomain = @"com.douban.audio-streamer.error
 @synthesize decoder = _decoder;
 
 @synthesize bufferingRatio = _bufferingRatio;
-
 #if TARGET_OS_IPHONE
 @synthesize pausedByInterruption = _pausedByInterruption;
 #endif /* TARGET_OS_IPHONE */
@@ -236,6 +235,11 @@ NSString *const kDOUAudioStreamerErrorDomain = @"com.douban.audio-streamer.error
     [[DOUAudioEventLoop sharedEventLoop] stop];
     [[DOUAudioEventLoop sharedEventLoop] setCurrentStreamer:nil];
   }
+}
+
+- (void)dealloc
+{
+    NSLog(@"---------------");
 }
 
 @end

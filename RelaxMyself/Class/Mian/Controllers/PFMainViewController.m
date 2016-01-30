@@ -10,7 +10,7 @@
 #import "PFPictureVc.h"
 #import "PFMainNavViewController.h"
 #import "PFLeftMenuVc.h"
-
+#import "PFMusicVc.h"
 
 @interface PFMainViewController ()
 
@@ -20,12 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    PFPictureVc *picture = [[PFPictureVc alloc] init];
-    picture.title = @"图片";
-    PFMainNavViewController *nav =  [[PFMainNavViewController alloc] initWithRootViewController:picture];
+//    
+//    PFPictureVc *picture = [[PFPictureVc alloc] init];
+//    picture.title = @"图片";
+//    PFMainNavViewController *nav =  [[PFMainNavViewController alloc] initWithRootViewController:picture];
+//    self.rootViewController = nav;
+    PFMusicVc *vc = [[PFMusicVc alloc] init];
+    PFMainNavViewController *nav = [[PFMainNavViewController alloc] initWithRootViewController:vc];
     self.rootViewController = nav;
-    
     
     PFLeftMenuVc *leftMenu = [[PFLeftMenuVc alloc] init];
     self.leftViewController = leftMenu;

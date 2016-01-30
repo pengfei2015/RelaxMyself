@@ -33,7 +33,7 @@
 		D3010BF91C55C61B00FA4888 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3010BF81C55C61B00FA4888 /* libsqlite3.0.tbd */; };
 		D33BB5DB1C570562004B1FA2 /* PFMusicDataCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D33BB5DA1C570562004B1FA2 /* PFMusicDataCacheTool.m */; };
 		D33BB5DE1C570A5A004B1FA2 /* PFMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D33BB5DD1C570A5A004B1FA2 /* PFMusicCell.m */; };
-		D33BB5E11C57175D004B1FA2 /* PFMusicPlayingVc.m in Sources */ = {isa = PBXBuildFile; fileRef = D33BB5E01C57175D004B1FA2 /* PFMusicPlayingVc.m */; };
+		D341819C1C5D091B00F026FC /* PFLeftBottomPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = D341819B1C5D091B00F026FC /* PFLeftBottomPlayView.m */; };
 		D36C7D641C573DEE003F51AD /* PFMusicPlayingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C7D631C573DEE003F51AD /* PFMusicPlayingFooterView.m */; };
 		D380970C1C5907D000EA0AA3 /* PFAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = D380970B1C5907D000EA0AA3 /* PFAudioFile.m */; };
 		D391801B1C50788000D824E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D391801A1C50788000D824E3 /* ViewController.m */; };
@@ -110,6 +110,9 @@
 		D3CB6D851C5286ED0072984D /* PFPictureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3CB6D831C5286ED0072984D /* PFPictureCell.xib */; };
 		D3D26D731C55F9B10004A659 /* PFPictureDataCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D26D721C55F9B10004A659 /* PFPictureDataCacheTool.m */; };
 		D3D26D761C5625970004A659 /* PFMusicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D26D751C5625970004A659 /* PFMusicModel.m */; };
+		D3D88B5D1C5C84DC00BD83C1 /* PFMusicPlayingVc.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D88B5C1C5C84DC00BD83C1 /* PFMusicPlayingVc.m */; };
+		D3E216A01C5B354C00364A21 /* PFMusicProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E2169F1C5B354C00364A21 /* PFMusicProgressView.m */; };
+		D3E216A61C5B507D00364A21 /* NSString+PF.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E216A51C5B507D00364A21 /* NSString+PF.m */; };
 		D3F566F71C54F28100E2446A /* MJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F566E91C54F28100E2446A /* MJPhoto.m */; };
 		D3F566F81C54F28100E2446A /* MJPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3F566EA1C54F28100E2446A /* MJPhotoBrowser.bundle */; };
 		D3F566F91C54F28100E2446A /* MJPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F566EC1C54F28100E2446A /* MJPhotoBrowser.m */; };
@@ -194,8 +197,8 @@
 		D33BB5DA1C570562004B1FA2 /* PFMusicDataCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicDataCacheTool.m; sourceTree = "<group>"; };
 		D33BB5DC1C570A5A004B1FA2 /* PFMusicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicCell.h; sourceTree = "<group>"; };
 		D33BB5DD1C570A5A004B1FA2 /* PFMusicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicCell.m; sourceTree = "<group>"; };
-		D33BB5DF1C57175D004B1FA2 /* PFMusicPlayingVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicPlayingVc.h; sourceTree = "<group>"; };
-		D33BB5E01C57175D004B1FA2 /* PFMusicPlayingVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicPlayingVc.m; sourceTree = "<group>"; };
+		D341819A1C5D091B00F026FC /* PFLeftBottomPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLeftBottomPlayView.h; sourceTree = "<group>"; };
+		D341819B1C5D091B00F026FC /* PFLeftBottomPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLeftBottomPlayView.m; sourceTree = "<group>"; };
 		D36C7D621C573DEE003F51AD /* PFMusicPlayingFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicPlayingFooterView.h; sourceTree = "<group>"; };
 		D36C7D631C573DEE003F51AD /* PFMusicPlayingFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicPlayingFooterView.m; sourceTree = "<group>"; };
 		D380970A1C5907D000EA0AA3 /* PFAudioFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFAudioFile.h; sourceTree = "<group>"; };
@@ -352,6 +355,12 @@
 		D3D26D721C55F9B10004A659 /* PFPictureDataCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFPictureDataCacheTool.m; sourceTree = "<group>"; };
 		D3D26D741C5625970004A659 /* PFMusicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicModel.h; sourceTree = "<group>"; };
 		D3D26D751C5625970004A659 /* PFMusicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicModel.m; sourceTree = "<group>"; };
+		D3D88B5B1C5C84DC00BD83C1 /* PFMusicPlayingVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicPlayingVc.h; sourceTree = "<group>"; };
+		D3D88B5C1C5C84DC00BD83C1 /* PFMusicPlayingVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicPlayingVc.m; sourceTree = "<group>"; };
+		D3E2169E1C5B354C00364A21 /* PFMusicProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMusicProgressView.h; sourceTree = "<group>"; };
+		D3E2169F1C5B354C00364A21 /* PFMusicProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMusicProgressView.m; sourceTree = "<group>"; };
+		D3E216A41C5B507D00364A21 /* NSString+PF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PF.h"; sourceTree = "<group>"; };
+		D3E216A51C5B507D00364A21 /* NSString+PF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PF.m"; sourceTree = "<group>"; };
 		D3F566E81C54F28100E2446A /* MJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhoto.h; sourceTree = "<group>"; };
 		D3F566E91C54F28100E2446A /* MJPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhoto.m; sourceTree = "<group>"; };
 		D3F566EA1C54F28100E2446A /* MJPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJPhotoBrowser.bundle; sourceTree = "<group>"; };
@@ -560,6 +569,8 @@
 				D39180511C50792800D824E3 /* UIImage+Extension.m */,
 				D39180521C50792800D824E3 /* UIView+PFExension.h */,
 				D39180531C50792800D824E3 /* UIView+PFExension.m */,
+				D3E216A41C5B507D00364A21 /* NSString+PF.h */,
+				D3E216A51C5B507D00364A21 /* NSString+PF.m */,
 			);
 			path = Catagory;
 			sourceTree = "<group>";
@@ -726,6 +737,8 @@
 			children = (
 				D39180EE1C50FB6000D824E3 /* PFLeftCell.h */,
 				D39180EF1C50FB6000D824E3 /* PFLeftCell.m */,
+				D341819A1C5D091B00F026FC /* PFLeftBottomPlayView.h */,
+				D341819B1C5D091B00F026FC /* PFLeftBottomPlayView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -820,8 +833,8 @@
 			children = (
 				D39180FB1C51049400D824E3 /* PFMusicVc.h */,
 				D39180FC1C51049400D824E3 /* PFMusicVc.m */,
-				D33BB5DF1C57175D004B1FA2 /* PFMusicPlayingVc.h */,
-				D33BB5E01C57175D004B1FA2 /* PFMusicPlayingVc.m */,
+				D3D88B5B1C5C84DC00BD83C1 /* PFMusicPlayingVc.h */,
+				D3D88B5C1C5C84DC00BD83C1 /* PFMusicPlayingVc.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -844,6 +857,8 @@
 				D33BB5DD1C570A5A004B1FA2 /* PFMusicCell.m */,
 				D36C7D621C573DEE003F51AD /* PFMusicPlayingFooterView.h */,
 				D36C7D631C573DEE003F51AD /* PFMusicPlayingFooterView.m */,
+				D3E2169E1C5B354C00364A21 /* PFMusicProgressView.h */,
+				D3E2169F1C5B354C00364A21 /* PFMusicProgressView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1103,9 +1118,11 @@
 				D3CB6D5D1C522A240072984D /* UIView+Extension.m in Sources */,
 				D39181101C51292E00D824E3 /* UIView+DOPExtension.m in Sources */,
 				D3010BD81C55BEF700FA4888 /* DOUAudioFrequencyAnalyzer.m in Sources */,
+				D3E216A61C5B507D00364A21 /* NSString+PF.m in Sources */,
 				D39180BB1C50792800D824E3 /* AFNetworkReachabilityManager.m in Sources */,
 				D39180B61C50792800D824E3 /* UIBarButtonItem+Extension.m in Sources */,
 				D39180B51C50792800D824E3 /* NSString+Emoji.m in Sources */,
+				D3E216A01C5B354C00364A21 /* PFMusicProgressView.m in Sources */,
 				D3010BD31C55BEF700FA4888 /* DOUAudioAnalyzer.m in Sources */,
 				D3F566FC1C54F28100E2446A /* MJPhotoToolbar.m in Sources */,
 				D39180DA1C50792800D824E3 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1123,7 +1140,6 @@
 				D39180CC1C50792800D824E3 /* NSObject+MJMember.m in Sources */,
 				D3010BF11C55BF4A00FA4888 /* FMDatabaseAdditions.m in Sources */,
 				D3F566FB1C54F28100E2446A /* MJPhotoProgressView.m in Sources */,
-				D33BB5E11C57175D004B1FA2 /* PFMusicPlayingVc.m in Sources */,
 				D36C7D641C573DEE003F51AD /* PFMusicPlayingFooterView.m in Sources */,
 				D3010BF21C55BF4A00FA4888 /* FMDatabasePool.m in Sources */,
 				D39180DD1C50792800D824E3 /* AppDelegate.m in Sources */,
@@ -1132,6 +1148,7 @@
 				D39180D71C50792800D824E3 /* UIImage+GIF.m in Sources */,
 				D3CB6D5C1C522A240072984D /* UIScrollView+MJRefresh.m in Sources */,
 				D39180E81C507E3200D824E3 /* PFLeftMenuVc.m in Sources */,
+				D3D88B5D1C5C84DC00BD83C1 /* PFMusicPlayingVc.m in Sources */,
 				D3F566F91C54F28100E2446A /* MJPhotoBrowser.m in Sources */,
 				D39180E21C507D3100D824E3 /* PFPictureVc.m in Sources */,
 				D3010BDA1C55BEF700FA4888 /* DOUAudioPlaybackItem.m in Sources */,
@@ -1156,6 +1173,7 @@
 				D3010BE01C55BEF700FA4888 /* DOUEAGLView.m in Sources */,
 				D39180D01C50792800D824E3 /* SDWebImageCompat.m in Sources */,
 				D39180BE1C50792800D824E3 /* AFURLResponseSerialization.m in Sources */,
+				D341819C1C5D091B00F026FC /* PFLeftBottomPlayView.m in Sources */,
 				D3010BE21C55BEF700FA4888 /* DOUSimpleHTTPRequest.m in Sources */,
 				D39180BF1C50792800D824E3 /* AFURLSessionManager.m in Sources */,
 				D39180FD1C51049400D824E3 /* PFMusicVc.m in Sources */,
