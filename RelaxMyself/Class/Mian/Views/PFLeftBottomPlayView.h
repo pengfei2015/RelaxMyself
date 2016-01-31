@@ -8,16 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class PFMusicModel,PFLeftBottomPlayView;
+@class PFMusicModel,DOUAudioStreamer;
 
-@protocol PFLeftBottomPlayViewDelegate <NSObject>
-
-#warning 待续
-@optional
-- (void)leftBottomView:(PFLeftBottomPlayView *)bottomView buttonClick:(UIButton *)button;
-
-@end
 @interface PFLeftBottomPlayView : UIView
 
 @property (nonatomic, strong) PFMusicModel *music;
+@property (nonatomic, strong) DOUAudioStreamer *streamer;
 @end

@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger,PFRequestType) {
 {
     BOOL _isFirst;
 }
-
+@property (nonatomic, weak) UIButton *topButton;
 @property (nonatomic, strong) NSMutableArray *musics;
 @end
 
@@ -44,6 +44,11 @@ static NSUInteger _page = 1;
     return _musics;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.topButton.hidden = YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +59,9 @@ static NSUInteger _page = 1;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.tableView headerBeginRefreshing];
+    
+    [self setupTopButton];
+    
 }
 
 #pragma mark -- 加载数据
@@ -89,7 +97,7 @@ static NSUInteger _page = 1;
     if (PFRequestNew == type) {
         _page = 1;
     }else{
-        ++_page;
+        _page = self.musics.count / 10 + 1;
     }
     //194
     NSString *url = PFFORMAT(@"http://echosystem.kibey.com/channel/info?id=194&page=%lu",(unsigned long)_page);
@@ -115,7 +123,7 @@ static NSUInteger _page = 1;
         _isFirst = 1;
         
     } failure:^(NSError *error) {
-        PFLog(@"%@",error);
+        PFLog(@"PFMusicVc");
         [self.tableView headerEndRefreshing];
         [self.tableView footerEndRefreshing];
         [MBProgressHUD showError:@"加载失败，请检查网络设置"];
@@ -151,5 +159,52 @@ static NSUInteger _page = 1;
     playingVc.musicIndex = indexPath.row;
     [self.navigationController pushViewController:playingVc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark --创建向上按钮
+- (void)setupTopButton
+{
+    UIButton *topButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    topButton.frame = CGRectMake(self.view.width - 20 - 30, self.view.height - 20 - 30, 30, 30);
+    [topButton setBackgroundImage:[UIImage imageNamed:@"topArrow"] forState:UIControlStateNormal];
+    [topButton addTarget:self action:@selector(walkToTop) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:topButton];
+    self.topButton = topButton;
+
+}
+
+
+- (void)walkToTop
+{
+    [self.tableView setContentOffset:CGPointMake(0, -64) animated:YES];
+}
+
+
+#pragma mark -- scrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    self.topButton.hidden = YES;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    self.topButton.hidden = NO;
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    self.topButton.hidden = NO;
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    self.topButton.hidden = YES;
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    self.topButton.hidden = NO;
+
 }
 @end

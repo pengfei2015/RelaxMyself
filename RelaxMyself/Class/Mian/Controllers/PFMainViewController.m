@@ -20,13 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    
-//    PFPictureVc *picture = [[PFPictureVc alloc] init];
-//    picture.title = @"图片";
-//    PFMainNavViewController *nav =  [[PFMainNavViewController alloc] initWithRootViewController:picture];
-//    self.rootViewController = nav;
-    PFMusicVc *vc = [[PFMusicVc alloc] init];
-    PFMainNavViewController *nav = [[PFMainNavViewController alloc] initWithRootViewController:vc];
+    
+    PFPictureVc *picture = [[PFPictureVc alloc] init];
+    picture.title = @"图片";
+    PFMainNavViewController *nav =  [[PFMainNavViewController alloc] initWithRootViewController:picture];
     self.rootViewController = nav;
     
     PFLeftMenuVc *leftMenu = [[PFLeftMenuVc alloc] init];

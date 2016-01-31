@@ -6,8 +6,8 @@
 //  Copyright © 2016年 温鹏飞. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "PFBaseTopViewController.h"
 
-@interface PFPictureVc : UIViewController
+@interface PFPictureVc : PFBaseTopViewController
 
 @end

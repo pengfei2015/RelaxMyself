@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-//@class PFMusicModel;
-
 @interface PFMusicPlayingVc : UIViewController
 
 @property (nonatomic, strong) NSArray *musics;

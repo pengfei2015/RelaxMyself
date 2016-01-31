@@ -30,9 +30,6 @@ typedef NS_ENUM(NSUInteger,PFRequestType) {
 #define PFNUMBER_PERROW 4
 @interface PFPictureVc ()<DOPNavbarMenuDelegate,PFWaterFlowLayoutDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
-{
-    NSUInteger _selectItemIndex;
-}
 // 导航栏菜单按钮
 @property (nonatomic, strong) DOPNavbarMenu *menu;
 @property (nonatomic, strong) NSArray *itemTitles;
@@ -171,9 +168,6 @@ static NSString *const ID = @"PFPictureCell";
     NSString *idstr = self.itemImages[self.menu.selectItemsIndex];
     // 取出的数据
     NSArray *arr = [PFPictureDataCacheTool dataWithIdstr:idstr];
-    PFLog(@"%@  %lu",idstr,arr.count);
-
-    PFLog(@"%lu ,  %lu",self.displayingIndex, self.menu.selectItemsIndex);
     // 如果当前显示的页面和点击的页面不是同一页面 并且有缓存数据的时候 从缓存中取出数据
     if (self.displayingIndex != self.menu.selectItemsIndex && arr.count > 0) {
         // 清空上一页面的数据
@@ -271,11 +265,15 @@ static NSString *const ID = @"PFPictureCell";
 #pragma mark -- DOPNavbarMenuDelegate
 - (void)didSelectedMenu:(DOPNavbarMenu *)menu atIndex:(NSInteger)index
 {
-    //[self.collectionView setContentOffset:CGPointMake(0, -64) animated:NO];
+    [self.collectionView setContentOffset:CGPointMake(0, -64) animated:NO];
     self.tag1 = self.itemTitles[index];
     self.pn = 0;
     self.title = self.itemTitles[index];
     [self.collectionView headerBeginRefreshing];
 }
 
+- (void)walkToTop
+{
+    [self.collectionView setContentOffset:CGPointMake(0, -64) animated:YES];
+}
 @end

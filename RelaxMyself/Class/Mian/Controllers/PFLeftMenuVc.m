@@ -17,19 +17,33 @@
 
 {
     UITableView *_tableView;
-    PFLeftBottomPlayView *_bottomView;
 }
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSArray *imageNames;
 @property (nonatomic, strong) NSArray *controllerNames;
+@property (nonatomic, strong)     PFLeftBottomPlayView *bottomView;
 @end
 
 @implementation PFLeftMenuVc
 
+- (PFLeftBottomPlayView *)bottomView
+{
+    if (!_bottomView) {
+        _bottomView = [[PFLeftBottomPlayView alloc] init];
+        CGFloat bottomW = self.view.width;
+        CGFloat bottomH = 50;
+        CGFloat bottomX = 0;
+        CGFloat bottomY = self.view.height - bottomH - 20;
+        _bottomView.frame = CGRectMake(bottomX, bottomY, bottomW, bottomH);
+        [self.view addSubview:_bottomView];
+
+    }
+    return _bottomView;
+}
 - (NSArray *)controllerNames
 {
     if (!_controllerNames) {
-        _controllerNames = @[@"PFPictureVc",@"PFMusicVc",@"PFReadingVc"];
+        _controllerNames = @[@"PFPictureVc",@"PFMusicVc",@"PFReadViewController"];
     }
     return _controllerNames;
 }
@@ -67,17 +81,6 @@
     [self.view addSubview:tableView];
     _tableView = tableView;
     
-    
-    PFLeftBottomPlayView *bottomView = [[PFLeftBottomPlayView alloc] init];
-    CGFloat bottomW = self.view.width;
-    CGFloat bottomH = 50;
-    CGFloat bottomX = 0;
-    CGFloat bottomY = self.view.height - bottomH - 20;
-    bottomView.backgroundColor = [UIColor redColor];
-    bottomView.frame = CGRectMake(bottomX, bottomY, bottomW, bottomH);
-    [self.view addSubview:bottomView];
-    _bottomView = bottomView;
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingMusicChange:) name:PFMUSIC_PLAY_NOTIFICATION object:nil];
 }
 
@@ -89,7 +92,9 @@
 
 - (void)playingMusicChange:(NSNotification *)notification
 {
-    _bottomView.music = notification.userInfo[PFMUSIC_PLAYING];
+    
+    self.bottomView.music = notification.userInfo[PFMUSIC_PLAYING];
+    self.bottomView.streamer = notification.userInfo[PFMUSIC_PLAYER];
 }
 #pragma mark -- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -17,6 +17,9 @@
 
 #define PFMUSIC_PLAY_NOTIFICATION @"PFMusicPlayNotification"
 #define PFMUSIC_PLAYING @"PFMusicPlaying"
+#define PFMUSIC_PLAYER @"PFMusicPlayer"
+
+#define PFREAD_FOOTER_TYPE 999
 
 #endif
 

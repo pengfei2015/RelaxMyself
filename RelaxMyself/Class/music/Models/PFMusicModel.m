@@ -32,6 +32,7 @@
         self.source = [aDecoder decodeObjectForKey:@"source"];
         self.userName = [aDecoder decodeObjectForKey:@"userName"];
         //self.audioFileURL = [aDecoder decodeObjectForKey:@"audioFileURL"];
+        self.id = [aDecoder decodeObjectForKey:@"id"];
     }
     return self;
 }
@@ -45,6 +46,7 @@
     [aCoder encodeObject:self.source forKey:@"source"];
     [aCoder encodeObject:self.info forKey:@"info"];
     [aCoder encodeObject:self.userName forKey:@"userName"];
+    [aCoder encodeObject:self.id forKey:@"id"];
     //[aCoder encodeObject:self.audioFileURL forKey:@"audioFileURL"];
     
 }

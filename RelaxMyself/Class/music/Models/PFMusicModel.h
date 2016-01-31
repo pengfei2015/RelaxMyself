@@ -25,6 +25,9 @@
 
 @property (nonatomic, copy) NSString *userName;
 
+@property (nonatomic, copy) NSString *id;
+
+
 //@property (nonatomic, strong) NSURL *audioFileURL;
 
 

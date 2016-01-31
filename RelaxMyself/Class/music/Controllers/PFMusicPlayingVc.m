@@ -16,7 +16,6 @@
 #import "PFAudioFile.h"
 #import "PFMusicProgressView.h"
 
-
 #define PFSTATUS_PROP @"status"
 #define PFBUFFERING_RATIO @"bufferingRatio"
 #define PFDURATION @"duration"
@@ -109,7 +108,7 @@
 - (void)setNavigationBar
 {
     self.view.backgroundColor = [UIColor grayColor];
-    
+// 旋转图像
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.size = CGSizeMake(self.view.width - 50, self.view.width - 50);
     imageView.center = self.view.center;
@@ -118,25 +117,29 @@
     _imageView = imageView;
     
     [self.view addSubview:imageView];
-    
+    // 返回按钮
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setBackgroundImage:[UIImage imageNamed:@"navigationbar_back_white"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
     backButton.frame = CGRectMake(20, 20, 25, 25);
     [self.view addSubview:backButton];
     
+    
+    // 歌曲名字
     UILabel *titleLab = [[UILabel alloc] init];
     titleLab.textColor = [UIColor whiteColor];
     titleLab.font = [UIFont systemFontOfSize:18.0 weight:20];
     [self.view addSubview:titleLab];
     _titleLab = titleLab;
     
+    // 歌手名字
     UILabel *nameLab = [[UILabel alloc] init];
     nameLab.font = [UIFont systemFontOfSize:16.0];
     nameLab.textColor = [UIColor whiteColor];
     [self.view addSubview:nameLab];
     _nameLab = nameLab;
     
+    // 播放控制界面
     PFMusicPlayingFooterView *footerView = [[PFMusicPlayingFooterView alloc] init];
     footerView.delegate = self;
     CGFloat footerW = self.view.width;
@@ -146,12 +149,13 @@
     footerView.frame = CGRectMake(footerX, footerY, footerW, footerH);
     [self.view addSubview:footerView];
     
+    // 歌曲进度界面
     PFMusicProgressView *progressView = [[PFMusicProgressView alloc] init];
     progressView.frame = CGRectMake(0, footerY - 21, self.view.width, 10);
     progressView.delegete = self;
     [self.view addSubview:progressView];
     self.progressView = progressView;
-
+   
 }
 
 - (void)backClick
@@ -258,11 +262,12 @@
 {
     PFAudioFile *audio = self.streamer.audioFile;
     NSString *playingUrlStr = audio.audioFileURL.absoluteString;
-    PFMusicModel *music = self.musics[index];
-    if ([playingUrlStr isEqualToString:music.source]) return;
+    PFMusicModel *music = _musics[index];
+    if ([playingUrlStr isEqualToString:music.source])
+        return;
     
     [self clearData];
-
+    
     self.audioFile.audioFileURL = [NSURL URLWithString:music.source];
     self.streamer = [DOUAudioStreamer streamerWithAudioFile:self.audioFile];
     self.streamer.volume = 0.5;
@@ -273,7 +278,7 @@
     [self.streamer addObserver:self forKeyPath:PFDURATION options:NSKeyValueObservingOptionOld context:nil];
     [self.streamer play];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:PFMUSIC_PLAY_NOTIFICATION object:self userInfo:@{PFMUSIC_PLAYING:music}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PFMUSIC_PLAY_NOTIFICATION object:self userInfo:@{PFMUSIC_PLAYING:music,PFMUSIC_PLAYER:self.streamer}];
     
     _isPlay = YES;
     

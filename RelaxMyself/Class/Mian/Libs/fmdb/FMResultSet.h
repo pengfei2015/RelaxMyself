@@ -35,7 +35,7 @@
 /// @name Properties
 ///-----------------
 
-/** Executed query */
+/** Executed query */ 
 
 @property (atomic, retain) NSString *query;
 

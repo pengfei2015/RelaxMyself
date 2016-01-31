@@ -237,9 +237,5 @@ NSString *const kDOUAudioStreamerErrorDomain = @"com.douban.audio-streamer.error
   }
 }
 
-- (void)dealloc
-{
-    NSLog(@"---------------");
-}
 
 @end
