@@ -9,6 +9,8 @@
 #import "PFReadFooterView.h"
 #import "PFReadFooterModel.h"
 #import "UIButton+WebCache.h"
+#import "PFReadViewController.h"
+
 
 @interface PFReadFooterView ()
 
@@ -70,8 +72,11 @@
     CGFloat footerX = margin;
     CGFloat footerY = CGRectGetMaxY(lastButton.frame) + margin;
     CGFloat footerW = self.width - 2 * margin;
-    CGFloat footerH = self.height - footerY - margin;
+    CGFloat footerH = lastButton.height;
     self.footerButton.frame = CGRectMake(footerX, footerY, footerW, footerH);
+    
+    self.height = CGRectGetMaxY(self.footerButton.frame) + margin;
+
 }
 
 - (void)setFooters:(NSArray *)footers
@@ -95,8 +100,8 @@
 
 - (void)buttonClick:(PFReadButton *)button
 {
-    if ([self.delegate respondsToSelector:@selector(footerView:buttonClick:)]) {
-        [self.delegate footerView:self buttonClick:button];
+    if ([self.footerDelegate respondsToSelector:@selector(footerView:buttonClick:)]) {
+        [self.footerDelegate footerView:self buttonClick:button];
     }
 }
 

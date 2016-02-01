@@ -14,11 +14,13 @@
     UIButton *_playButton;
     UIButton *_nextButton;
     UIButton *_previousButon;
-    
+    UILabel *_voiceLab;
     BOOL _isPause;
 }
 
 @end
+
+
 @implementation PFMusicPlayingFooterView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -43,8 +45,34 @@
         [_previousButon setBackgroundImage:[UIImage imageNamed:@"previous"] forState:UIControlStateNormal];
         [self addSubview:_previousButon];
         
+        UISlider *slider = [[UISlider alloc] init];
+        [slider addTarget:self action:@selector(sliderDraging:) forControlEvents:UIControlEventValueChanged];
+        [self addSubview:slider];
+        _slider = slider;
+        
+        UILabel *voiceLab = [[UILabel alloc] init];
+        voiceLab.textColor = [UIColor whiteColor];
+        voiceLab.font = [UIFont systemFontOfSize:12.0];
+        voiceLab.text = PFFORMAT(@"音量：%d",5);
+
+        voiceLab.textAlignment = NSTextAlignmentRight;
+        [self addSubview:voiceLab];
+        _voiceLab = voiceLab;
+        
     }
     return self;
+}
+
+- (void)sliderDraging:(UISlider *)slider
+{
+    if ([self.delegate respondsToSelector:@selector(musicPlayingFooterView:voiceValueChange:)]) {
+        NSUInteger voice = (NSUInteger)(slider.value * 10);
+        _voiceLab.text = PFFORMAT(@"音量：%u",voice);
+        [self.delegate musicPlayingFooterView:self voiceValueChange:slider.value];
+        
+        [[NSUserDefaults standardUserDefaults] setFloat:_slider.value forKey:MUSIC_VOICE];
+
+    }
 }
 
 - (void)layoutSubviews
@@ -67,6 +95,17 @@
     _nextButton.size = CGSizeMake(42.0, 46.0);
     _nextButton.centerY = _playButton.centerY;
     _nextButton.x = CGRectGetMaxX(_playButton.frame) + margin ;
+    
+    _slider.x = CGRectGetMaxX(_nextButton.frame);
+    _slider.width = self.width - _slider.x - 5;
+    _slider.height = 20;
+    _slider.centerY = _playButton.centerY;
+    
+    _voiceLab.width = 60;
+    _voiceLab.height = 20;
+    _voiceLab.centerY = _playButton.centerY;
+    _voiceLab.x = CGRectGetMinX(_previousButon.frame) - _voiceLab.width;
+   
 }
 
 - (void)buttonClick:(UIButton *)button
@@ -92,6 +131,8 @@
 {
     _delegate = delegate;
     [self buttonClick:_playButton];
+    self.slider.value = [[NSUserDefaults standardUserDefaults] floatForKey:MUSIC_VOICE];
+    [self sliderDraging:self.slider];
 }
 
 @end

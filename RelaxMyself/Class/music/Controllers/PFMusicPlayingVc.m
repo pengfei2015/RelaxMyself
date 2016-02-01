@@ -35,7 +35,7 @@
 @property (nonatomic, strong) PFAudioFile *audioFile;
 
 @property (nonatomic, weak) PFMusicProgressView *progressView;
-
+@property (nonatomic, weak) PFMusicPlayingFooterView *footerView;
 @property (nonatomic, strong) NSTimer *timer;
 @end
 
@@ -50,14 +50,11 @@
 }
 
 
-
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
     self.navigationController.navigationBar.hidden = NO;
-    
-    
+
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -78,6 +75,7 @@
 - (void)dealloc
 {
     [self removeObservers];
+
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(DOUAudioStreamer *)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
@@ -131,7 +129,7 @@
     // 分享按钮
     
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    shareButton.frame = CGRectMake(self.view.width - 50 - 20, 20, 50, 30);
+    shareButton.frame = CGRectMake(self.view.width - 50 - 20, 20, 50, 25);
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:shareButton];
@@ -159,6 +157,7 @@
     CGFloat footerY = self.view.height - footerH;
     footerView.frame = CGRectMake(footerX, footerY, footerW, footerH);
     [self.view addSubview:footerView];
+    self.footerView = footerView;
     
     // 歌曲进度界面
     PFMusicProgressView *progressView = [[PFMusicProgressView alloc] init];
@@ -224,6 +223,13 @@
 }
 
 #pragma mark -- PFMusicPlayingFooterViewDelegate
+
+- (void)musicPlayingFooterView:(PFMusicPlayingFooterView *)footerView voiceValueChange:(CGFloat)value
+{
+    if (self.streamer) {
+        self.streamer.volume = value;
+    }
+}
 - (void)musicPlayingFooterView:(PFMusicPlayingFooterView *)footerView buttonTypeClick:(PFMusicPlayButtonType)type
 {
     switch (type) {
@@ -293,7 +299,7 @@
     
     self.audioFile.audioFileURL = [NSURL URLWithString:music.source];
     self.streamer = [DOUAudioStreamer streamerWithAudioFile:self.audioFile];
-    self.streamer.volume = 0.5;
+    [self musicPlayingFooterView:self.footerView voiceValueChange:self.footerView.slider.value];
     [self.streamer addObserver:self forKeyPath:PFSTATUS_PROP options:NSKeyValueObservingOptionOld context:nil];
     
     [self.streamer addObserver:self forKeyPath:PFBUFFERING_RATIO options:NSKeyValueObservingOptionOld context:nil];
@@ -346,7 +352,6 @@
     [self.streamer removeObserver:self forKeyPath:PFSTATUS_PROP];
     [self.streamer removeObserver:self forKeyPath:PFBUFFERING_RATIO];
     [self.streamer removeObserver:self forKeyPath:PFDURATION];
-
 }
 
 #pragma mark -- PFMusicProgressViewDelegate

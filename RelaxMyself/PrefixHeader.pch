@@ -21,6 +21,9 @@
 
 #define PFREAD_FOOTER_TYPE 999
 #define UMAPP_KEY @"56aec74fe0f55aab05002506"
+
+// 偏好设置
+#define MUSIC_VOICE @"musicVoice" // 音乐大小的key
 #endif
 
 #endif /* PrefixHeader_pch */

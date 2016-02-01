@@ -21,11 +21,12 @@ typedef NS_ENUM(NSUInteger,PFMusicPlayButtonType) {
 @optional
 - (void)musicPlayingFooterView:(PFMusicPlayingFooterView *)footerView buttonTypeClick:(PFMusicPlayButtonType)type;
 
+- (void)musicPlayingFooterView:(PFMusicPlayingFooterView *)footerView voiceValueChange:(CGFloat)value;
 @end
 
 
 @interface PFMusicPlayingFooterView : UIView
 
 @property (nonatomic, weak) id<PFMusicPlayingFooterViewDelegate> delegate;
-
+@property (nonatomic, strong) UISlider *slider;
 @end

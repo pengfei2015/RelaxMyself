@@ -186,9 +186,9 @@ static NSString *const ID = @"PFPictureCell";
     if (PFRequestNew == type) {
         self.pn = 0;
     }else{
-        self.pn += 30;
+        self.pn = self.images.count + 30;
     }
-    request[@"pn"] = PFFORMAT(@"%lu",self.pn);
+    request[@"pn"] = PFFORMAT(@"%u",self.pn);
     
     NSString *url = PFFORMAT(@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=全部",self.tag1);
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

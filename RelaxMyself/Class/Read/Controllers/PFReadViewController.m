@@ -22,6 +22,8 @@
 @property (nonatomic, weak) PFReadFooterView *footerView;
 @property (nonatomic, assign) NSUInteger isFirst;
 
+@property (nonatomic, weak) UIScrollView *bgScrollView;
+
 @end
 
 @implementation PFReadViewController
@@ -32,19 +34,23 @@ static NSString *const _readModel = @"readModel";
     
     // nav 的第一个子视图是scrollview的时候  系统会自动加上64的偏移
     self.automaticallyAdjustsScrollViewInsets = NO;
-    // 下载数据
    
+    UIScrollView *bgScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    bgScrollView.bounces = NO;
+    [self.view addSubview:bgScrollView];
+    self.bgScrollView = bgScrollView;
     
     // 添加头部view
     PFHeaderView *headerView = [[PFHeaderView alloc] init];
     headerView.frame = CGRectMake(0, 64, self.view.width, 120);
     headerView.delegate = self;
-    [self.view addSubview:headerView];
+    [self.bgScrollView addSubview:headerView];
     self.headerView = headerView;
     
     // 添加底部view
     [self setupFooterView];
     
+    self.bgScrollView.contentSize = CGSizeMake(self.view.width, CGRectGetMaxY(self.footerView.frame));
     [self downLoadDatas];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(downLoadDatas)];
@@ -77,16 +83,28 @@ static NSString *const _readModel = @"readModel";
 - (void)setupFooterView
 {
     PFReadFooterView *footerView = [[PFReadFooterView alloc] init];
-    CGFloat footerX = 0;
-    footerView.delegate = self;
-    CGFloat footerY = CGRectGetMaxY(self.headerView.frame);
-    CGFloat footerW = self.view.width;
-    CGFloat footerH = self.view.height - footerY;
-    footerView.frame = CGRectMake(footerX, footerY, footerW, footerH);
-    [self.view addSubview:footerView];
+    [self.bgScrollView addSubview:footerView];
+
+    footerView.footerDelegate = self;
+    footerView.width = self.view.width;
+    footerView.x = 0;
+    footerView.y = CGRectGetMaxY(self.headerView.frame);
     self.footerView = footerView;
+    
+    [footerView addObserver:self forKeyPath:@"height" options:NSKeyValueObservingOptionNew context:nil];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    if ([@"height" isEqualToString:keyPath]) {
+        self.bgScrollView.contentSize = CGSizeMake(self.view.width, CGRectGetMaxY(self.footerView.frame));
+    }
+}
+
+- (void)dealloc
+{
+    [self.footerView removeObserver:self forKeyPath:@"height"];
+}
 #pragma mark -- PFHeaderViewDelegate
 - (void)headerView:(PFHeaderView *)headerView imageViewTap:(PFHerderImageView *)imageView
 {

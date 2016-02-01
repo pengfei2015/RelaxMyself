@@ -19,6 +19,6 @@
 @interface PFReadFooterView : UIView
 
 @property (nonatomic, strong) NSArray *footers;
-@property (nonatomic, weak) id<PFReadFooterViewDelegate> delegate;
+@property (nonatomic, weak) id<PFReadFooterViewDelegate> footerDelegate;
 
 @end

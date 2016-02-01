@@ -28,10 +28,10 @@
     UIButton *topButton = [UIButton buttonWithType:UIButtonTypeCustom];
     topButton.frame = CGRectMake(self.view.width - 20 - 30, self.view.height - 20 - 30, 30, 30);
     [topButton setBackgroundImage:[UIImage imageNamed:@"topArrow"] forState:UIControlStateNormal];
+    topButton.hidden = YES;
     [topButton addTarget:self action:@selector(walkToTop) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:topButton];
-//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//    [window addSubview:topButton];
+
     self.topButton = topButton;
     
 }

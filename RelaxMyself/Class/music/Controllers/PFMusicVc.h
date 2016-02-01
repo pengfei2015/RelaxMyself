@@ -6,11 +6,11 @@
 //  Copyright © 2016年 温鹏飞. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "PFBaseTopViewController.h"
 
 
 
-@interface PFMusicVc : UITableViewController
+@interface PFMusicVc : PFBaseTopViewController
 
 
 @end

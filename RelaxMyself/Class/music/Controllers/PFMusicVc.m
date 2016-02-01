@@ -22,11 +22,11 @@ typedef NS_ENUM(NSUInteger,PFRequestType) {
     PFRequestMore
 };
 
-@interface PFMusicVc ()
+@interface PFMusicVc ()<UITableViewDataSource,UITableViewDelegate>
 {
     BOOL _isFirst;
 }
-@property (nonatomic, weak) UIButton *topButton;
+@property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *musics;
 @end
 
@@ -44,23 +44,20 @@ static NSUInteger _page = 1;
     return _musics;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    self.topButton.hidden = YES;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
     [self.tableView addHeaderWithTarget:self action:@selector(loadNewData)];
     [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
     self.tableView.rowHeight = 120;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.tableView headerBeginRefreshing];
-    
-    [self setupTopButton];
     
 }
 
@@ -161,19 +158,6 @@ static NSUInteger _page = 1;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark --创建向上按钮
-- (void)setupTopButton
-{
-    UIButton *topButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    topButton.frame = CGRectMake(self.view.width - 20 - 30, self.view.height - 20 - 30, 30, 30);
-    [topButton setBackgroundImage:[UIImage imageNamed:@"topArrow"] forState:UIControlStateNormal];
-    [topButton addTarget:self action:@selector(walkToTop) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window addSubview:topButton];
-    self.topButton = topButton;
-
-}
 
 
 - (void)walkToTop
@@ -181,30 +165,4 @@ static NSUInteger _page = 1;
     [self.tableView setContentOffset:CGPointMake(0, -64) animated:YES];
 }
 
-
-#pragma mark -- scrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    self.topButton.hidden = YES;
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    self.topButton.hidden = NO;
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-{
-    self.topButton.hidden = NO;
-}
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    self.topButton.hidden = YES;
-}
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    self.topButton.hidden = NO;
-
-}
 @end
