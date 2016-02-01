@@ -20,7 +20,7 @@
 #define PFMUSIC_PLAYER @"PFMusicPlayer"
 
 #define PFREAD_FOOTER_TYPE 999
-
+#define UMAPP_KEY @"56aec74fe0f55aab05002506"
 #endif
 
 #endif /* PrefixHeader_pch */

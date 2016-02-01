@@ -15,12 +15,14 @@
 #import "MBProgressHUD+MJ.h"
 #import "PFAudioFile.h"
 #import "PFMusicProgressView.h"
+#import "UMSocial.h"
+
 
 #define PFSTATUS_PROP @"status"
 #define PFBUFFERING_RATIO @"bufferingRatio"
 #define PFDURATION @"duration"
 
-@interface PFMusicPlayingVc ()<PFMusicPlayingFooterViewDelegate,PFMusicProgressViewDelegate>
+@interface PFMusicPlayingVc ()<PFMusicPlayingFooterViewDelegate,PFMusicProgressViewDelegate,UMSocialUIDelegate>
 
 {
     UIImageView *_imageView;
@@ -105,6 +107,8 @@
     
 }
 
+#pragma mark -- 创建按钮等
+
 - (void)setNavigationBar
 {
     self.view.backgroundColor = [UIColor grayColor];
@@ -124,6 +128,13 @@
     backButton.frame = CGRectMake(20, 20, 25, 25);
     [self.view addSubview:backButton];
     
+    // 分享按钮
+    
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareButton.frame = CGRectMake(self.view.width - 50 - 20, 20, 50, 30);
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:shareButton];
     
     // 歌曲名字
     UILabel *titleLab = [[UILabel alloc] init];
@@ -157,7 +168,19 @@
     self.progressView = progressView;
    
 }
+- (void)shareClick
+{
+    NSString *text = @"分享音乐，分享快乐";
+    NSString *url = [self.musics[self.musicIndex] source];
+    NSString *str = PFFORMAT(@"%@:%@",text,url);
+    [UMSocialSnsService presentSnsIconSheetView:self appKey:UMAPP_KEY shareText:str shareImage:nil shareToSnsNames:@[UMShareToSina,UMShareToTencent,UMShareToRenren,UMShareToWechatTimeline,UMShareToSms,UMShareToEmail] delegate:self];
 
+//    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:url image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+//        if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+//            [MBProgressHUD showSuccess:@"成功分享"];
+//        }
+//    }];
+}
 - (void)backClick
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -368,5 +391,21 @@ static id _instance;
         _instance = [super allocWithZone:zone];
     });
     return _instance;
+}
+
+
+#pragma mark -- UMSocialUIDelegate
+- (BOOL)isDirectShareInIconActionSheet
+{
+    return YES;
+}
+
+- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    if (response.responseCode == UMSResponseCodeSuccess) {
+        [MBProgressHUD showSuccess:@"分享成功"];
+    }else if (response.responseCode == UMSResponseCodeFaild){
+        [MBProgressHUD showError:@"分享失败"];
+    }
 }
 @end

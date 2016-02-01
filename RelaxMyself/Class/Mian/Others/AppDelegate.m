@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PFMainViewController.h"
+#import "UMSocial.h"
 
 
 @interface AppDelegate ()
@@ -26,6 +27,8 @@
     self.mainVc = [[PFMainViewController alloc] init];
     self.window.rootViewController = self.mainVc;
     
+    [UMSocialData setAppKey:UMAPP_KEY];
+
     return YES;
 }
 

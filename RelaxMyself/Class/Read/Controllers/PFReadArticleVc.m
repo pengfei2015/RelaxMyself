@@ -12,6 +12,8 @@
 #import "PFReadArticleDataCancheTool.h"
 #import "PFArticleModel.h"
 #import "PFReadHeaderAticleRequest.h"
+//#import "UMSocial.h"
+#import "MBProgressHUD+MJ.h"
 
 
 @interface PFReadArticleVc ()<UIWebViewDelegate>
@@ -36,8 +38,34 @@
     self.webView = webView;
     
     [self requsetData];
+    
+//    UIBarButtonItem *shareButton = [UIBarButtonItem itemWithImageName:@"share" target:self action:@selector(shareClick)];
+//    self.navigationItem.rightBarButtonItem = shareButton;
 }
+//
+//- (void)shareClick
+//{
+//    NSString *text = @"分享美文，分享知识";
+//    NSString *url = self.html;
+//    NSString *str = PFFORMAT(@"%@:%@",text,url);
+//    [UMSocialSnsService presentSnsIconSheetView:self appKey:UMAPP_KEY shareText:str shareImage:nil shareToSnsNames:@[UMShareToSina,UMShareToTencent,UMShareToRenren,UMShareToWechatTimeline,UMShareToSms,UMShareToEmail] delegate:self];
+//
+//}
 
+//#pragma mark -- UMSocialUIDelegate
+//- (BOOL)isDirectShareInIconActionSheet
+//{
+//    return YES;
+//}
+//
+//- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+//{
+//    if (response.responseCode == UMSResponseCodeSuccess) {
+//        [MBProgressHUD showSuccess:@"分享成功"];
+//    }else if (response.responseCode == UMSResponseCodeFaild){
+//        [MBProgressHUD showError:@"分享失败"];
+//    }
+//}
 - (void)requsetData
 {
     PFArticleModel *model =  [[PFReadArticleDataCancheTool dataWithIdstr:self.url] firstObject];
@@ -61,6 +89,7 @@
         [self.webView loadHTMLString:self.html baseURL:nil];
     } failure:^(NSError *error) {
         PFLog(@"PFReadHeaderVc");
+        [MBProgressHUD showError:@"加载失败，请检查网络设置"];
     }];
     
 }
