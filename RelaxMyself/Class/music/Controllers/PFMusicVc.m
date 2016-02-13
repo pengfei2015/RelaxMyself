@@ -44,6 +44,11 @@ static NSUInteger _page = 1;
     return _musics;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     

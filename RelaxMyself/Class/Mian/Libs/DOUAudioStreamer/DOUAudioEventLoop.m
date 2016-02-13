@@ -579,7 +579,9 @@ static void *event_loop_main(void *info)
 
 - (void)setCurrentTime:(NSTimeInterval)currentTime
 {
+
   NSUInteger milliseconds = (NSUInteger)lrint(currentTime * 1000.0);
+    
   [self _sendEvent:event_seek userData:(void *)(uintptr_t)milliseconds];
 }
 

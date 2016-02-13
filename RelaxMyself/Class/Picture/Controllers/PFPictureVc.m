@@ -186,9 +186,10 @@ static NSString *const ID = @"PFPictureCell";
     if (PFRequestNew == type) {
         self.pn = 0;
     }else{
+#warning 这样做只能保证当服务器内容变化不大的时候，上拉的时候才不会出现重复。
         self.pn = self.images.count + 30;
     }
-    request[@"pn"] = PFFORMAT(@"%u",self.pn);
+    request[@"pn"] = PFFORMAT(@"%lu",self.pn);
     
     NSString *url = PFFORMAT(@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=全部",self.tag1);
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

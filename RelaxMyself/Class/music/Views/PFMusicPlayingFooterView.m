@@ -7,10 +7,12 @@
 //
 
 #import "PFMusicPlayingFooterView.h"
+#import "AFHTTPSessionManager.h"
 
 @interface PFMusicPlayingFooterView ()
 
 {
+    UISlider *_slider;
     UIButton *_playButton;
     UIButton *_nextButton;
     UIButton *_previousButon;
@@ -46,6 +48,7 @@
         [self addSubview:_previousButon];
         
         UISlider *slider = [[UISlider alloc] init];
+        slider.value = [[NSUserDefaults standardUserDefaults] floatForKey:MUSIC_VOICE];
         [slider addTarget:self action:@selector(sliderDraging:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:slider];
         _slider = slider;
@@ -53,8 +56,6 @@
         UILabel *voiceLab = [[UILabel alloc] init];
         voiceLab.textColor = [UIColor whiteColor];
         voiceLab.font = [UIFont systemFontOfSize:12.0];
-        voiceLab.text = PFFORMAT(@"音量：%d",5);
-
         voiceLab.textAlignment = NSTextAlignmentRight;
         [self addSubview:voiceLab];
         _voiceLab = voiceLab;
@@ -67,7 +68,7 @@
 {
     if ([self.delegate respondsToSelector:@selector(musicPlayingFooterView:voiceValueChange:)]) {
         NSUInteger voice = (NSUInteger)(slider.value * 10);
-        _voiceLab.text = PFFORMAT(@"音量：%u",voice);
+        _voiceLab.text = PFFORMAT(@"音量：%lu",voice);
         [self.delegate musicPlayingFooterView:self voiceValueChange:slider.value];
         
         [[NSUserDefaults standardUserDefaults] setFloat:_slider.value forKey:MUSIC_VOICE];
@@ -131,8 +132,7 @@
 {
     _delegate = delegate;
     [self buttonClick:_playButton];
-    self.slider.value = [[NSUserDefaults standardUserDefaults] floatForKey:MUSIC_VOICE];
-    [self sliderDraging:self.slider];
+    [self sliderDraging:_slider];
 }
 
 @end

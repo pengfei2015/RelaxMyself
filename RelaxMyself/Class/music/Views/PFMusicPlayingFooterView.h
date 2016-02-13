@@ -28,5 +28,4 @@ typedef NS_ENUM(NSUInteger,PFMusicPlayButtonType) {
 @interface PFMusicPlayingFooterView : UIView
 
 @property (nonatomic, weak) id<PFMusicPlayingFooterViewDelegate> delegate;
-@property (nonatomic, strong) UISlider *slider;
 @end

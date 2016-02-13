@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) NSURL *audioFileURL;
 
+@property (nonatomic, copy) NSString *id;
+
 @end

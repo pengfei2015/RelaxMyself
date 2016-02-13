@@ -186,34 +186,48 @@
 }
 #pragma mark -- 定时器相关
 
+// 添加定时器
 - (void)addTimer
 {
     if (self.timer) return;
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateCurrentTime) userInfo:nil repeats:YES];
-    [_timer fire];
+    //[_timer fire];
     [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     
     self.link = [CADisplayLink displayLinkWithTarget:self selector:@selector(roundRotate)];
     [self.link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 }
+
+// 定时器旋转方法
 - (void)roundRotate
 {
     _imageView.transform = CGAffineTransformRotate(_imageView.transform, M_PI_4 / 200);
 
 }
+
+// 定时器更新数据
 - (void)updateCurrentTime
 {
-    // 定时器开始的时候可能还没有获取到值  所以除数可能为0造成崩溃
-    if (self.streamer.duration == 0.0) return;
     
-    double temp = self.streamer.currentTime / self.streamer.duration;
-    //if (isnan(temp)) return;
-    self.progressView.slideCurrentX = temp * self.progressView.slideMaxX;
-    self.progressView.progressWidth = self.progressView.slideCurrentX;
-    self.progressView.currentTime = self.streamer.currentTime;
+    
+    [self updateProgressWithCurrentTime:self.streamer.currentTime];
     
 }
 
+- (void)updateProgressWithCurrentTime:(CGFloat)currentTime
+{
+    // 定时器开始的时候可能还没有获取到值  所以除数可能为0造成崩溃
+    if (self.streamer.duration == 0.0 && currentTime != 0.0) return;
+    double temp = currentTime / self.streamer.duration;
+    //if (isnan(temp) && currentTime != 0.0) return;
+    if (currentTime == 0.0) {
+        temp = 0.0;
+    }
+    self.progressView.slideCurrentX = temp * self.progressView.slideMaxX;
+    self.progressView.progressWidth = self.progressView.slideCurrentX;
+    self.progressView.currentTime = currentTime;
+}
+// 移除定时器
 - (void)removeTimer
 {
     [self.timer invalidate];
@@ -224,12 +238,15 @@
 
 #pragma mark -- PFMusicPlayingFooterViewDelegate
 
+// 歌曲播放音量的设置
 - (void)musicPlayingFooterView:(PFMusicPlayingFooterView *)footerView voiceValueChange:(CGFloat)value
 {
     if (self.streamer) {
         self.streamer.volume = value;
     }
 }
+
+// 歌曲控制界面的点击
 - (void)musicPlayingFooterView:(PFMusicPlayingFooterView *)footerView buttonTypeClick:(PFMusicPlayButtonType)type
 {
     switch (type) {
@@ -254,7 +271,7 @@
     }
 }
 
-// 按钮点击
+// 按钮点击 暂停或者播放
 - (void)playOrPause
 {
     if (_isPlay) {
@@ -266,20 +283,24 @@
     }
 }
 
+// 下一首
 - (void)nextSong
 {
     if (self.musics.count - 1  == self.musicIndex) {
         [MBProgressHUD showError:@"已经是最后一首了"];
+        [self updateProgressWithCurrentTime:0.0];
         return;
     }
     ++ self.musicIndex;
     [self playSongAtIndex:self.musicIndex];
 }
 
+// 上一首
 - (void)previousSong
 {
     if (0 == self.musicIndex) {
         [MBProgressHUD showError:@"已经是第一首了"];
+        [self updateProgressWithCurrentTime:0.0];
         return;
     }
     -- self.musicIndex;
@@ -289,25 +310,40 @@
 // 播放歌曲
 - (void)playSongAtIndex:(NSUInteger)index
 {
+    
+// 判断是否是同一首歌? 如果是的话就返回
+    
+#warning 因为歌曲的网址可能一样，所以这里判断歌曲的来源是不靠谱的
     PFAudioFile *audio = self.streamer.audioFile;
-    NSString *playingUrlStr = audio.audioFileURL.absoluteString;
+   // NSString *playingUrlStr = audio.audioFileURL.absoluteString;
     PFMusicModel *music = _musics[index];
-    if ([playingUrlStr isEqualToString:music.source])
-        return;
+    
+    //if ([playingUrlStr isEqualToString:music.source])
+     //   return;
+    if ([audio.id isEqualToString:music.id]) return;
     
     [self clearData];
     
     self.audioFile.audioFileURL = [NSURL URLWithString:music.source];
+    self.audioFile.id = [music.id copy];
+
     self.streamer = [DOUAudioStreamer streamerWithAudioFile:self.audioFile];
-    [self musicPlayingFooterView:self.footerView voiceValueChange:self.footerView.slider.value];
+    CGFloat value = [[NSUserDefaults standardUserDefaults] floatForKey:MUSIC_VOICE];
+    
+    [self musicPlayingFooterView:self.footerView voiceValueChange:value];
+    
+    // KVO 键值观察
     [self.streamer addObserver:self forKeyPath:PFSTATUS_PROP options:NSKeyValueObservingOptionOld context:nil];
     
     [self.streamer addObserver:self forKeyPath:PFBUFFERING_RATIO options:NSKeyValueObservingOptionOld context:nil];
     
     [self.streamer addObserver:self forKeyPath:PFDURATION options:NSKeyValueObservingOptionOld context:nil];
+    
     [self.streamer play];
     
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:PFMUSIC_PLAY_NOTIFICATION object:self userInfo:@{PFMUSIC_PLAYING:music,PFMUSIC_PLAYER:self.streamer}];
+   
     
     _isPlay = YES;
     
@@ -345,6 +381,8 @@
     
     [self removeTimer];
     _imageView.transform = CGAffineTransformIdentity;
+    
+    [self updateProgressWithCurrentTime:0.0];
 }
 
 - (void)removeObservers
@@ -357,14 +395,23 @@
 #pragma mark -- PFMusicProgressViewDelegate
 - (void)musicProgressView:(PFMusicProgressView *)progressView progressTapGesture:(UITapGestureRecognizer *)recognizer
 {
+    [self removeTimer];
     CGPoint point = [recognizer locationInView:recognizer.view];
-    self.streamer.currentTime = (point.x / recognizer.view.width) * self.streamer.duration;
-    [self updateCurrentTime];
+    CGFloat x = (point.x / recognizer.view.width) * self.streamer.duration;
+#warning 为什么点击后currentTime数据不是立马改变的
+    self.streamer.currentTime = x;
+
+    [self updateProgressWithCurrentTime:x];
+    
+    if (_isPlay) {
+        [self addTimer];
+    }
 }
 
 - (void)musicProgressView:(PFMusicProgressView *)progressView slidePanGesture:(UIPanGestureRecognizer *)recognizer
 {
-    CGPoint point = [recognizer locationInView:recognizer.view];
+    CGPoint point = [recognizer translationInView:recognizer.view];
+    
     [recognizer setTranslation:CGPointZero inView:recognizer.view];
     
     CGFloat maxX = self.progressView.slideMaxX;
@@ -384,7 +431,9 @@
         [self removeTimer];
     }else if (UIGestureRecognizerStateEnded == recognizer.state){
         self.streamer.currentTime = time;
-        [self updateCurrentTime];
+        if (_isPlay == YES) {
+            [self addTimer];
+        }
     }
 }
 
